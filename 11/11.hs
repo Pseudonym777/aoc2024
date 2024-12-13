@@ -23,7 +23,5 @@ splitdigits n = [read l, read r]
         l = length s
         (l,r) = 
 
-
-
 countMapApply:: (Ord a,Ord b) =>(a ->[b]) -> M.Map a Int -> M.Map b Int
 countMapApply f m = M.fromListWith (+) $ concatMap (\(v,c) -> [(nv,c) | nv <- f v]) (M.toList m)

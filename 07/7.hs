@@ -6,8 +6,8 @@ main = do
     let problems = map parseLine  . B.lines $ input
     print $ part2 problems
     
-part1 = sum . map fst . filter (uncurry $ isCalibrated [multInv,addInv]) $ problems
-part2 = sum . map fst . filter (uncurry $ isCalibrated [catInv,multInv,addInv]) $ problems
+part1 problems = sum . map fst . filter (uncurry $ isCalibrated [multInv,addInv]) $ problems
+part2 problems = sum . map fst . filter (uncurry $ isCalibrated [catInv,multInv,addInv]) $ problems
 
 parseLine::B.ByteString -> (Int,[Int])
 parseLine xs = let (w:ws) = B.words xs in (readIntUnsafe . B.init $ w,map readIntUnsafe ws)
