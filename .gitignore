@@ -1,6 +1,7 @@
 dist
 dist-*
 cabal-dev
+*.txt
 *.o
 *.hi
 *.hie
@@ -21,4 +22,3 @@ cabal.project.local
 cabal.project.local~
 .HTF/
 .ghc.environment.*
-.txt
