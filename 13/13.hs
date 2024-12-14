@@ -1,6 +1,7 @@
 import Control.Monad
 import Data.Maybe
 import Data.Char
+import Data.List
 main::IO ()
 main = do
     input <- readFile "input.txt"
@@ -23,9 +24,20 @@ score (x,y) = 3*x + y
 
 det [x1,y1] [x2,y2] = x1*y2 - x2*y1
 
+handleZeroDet::[Int] -> [Int] -> [Int] -> Maybe (Int,Int)
 handleZeroDet [x1,y1] [x2,y2] [x,y]
-    |x1*3 > y1 = do n <- exactdiv x x1; return (n,0)
-    |otherwise = do n <- exactdiv y y1; return (0,n)
+    |x1*3 > y1 = handleZeroDet  [x2,y2] [x1,y1] [x,y]
+    |not $ gcd x1 x2 `divides` x = Nothing
+    |xpref = dioph x1 x2 x
+    |otherwise = fmap (\(u,v) -> (v,u)) $ dioph x2 x1 x
+        where 
+            xpref = x1*3 > y1
+            dioph a b c = fmap (\n -> (div ( c - ( b * n)) a,n)) $ findIndex ( mod c a ==) $ iterate (\n -> mod (n + b) a) 0
+             --euclid algorithm or something would be much faster
+
+
+
+divides x y = mod y x == 0
 
 cramer::[Int] -> [Int] -> [Int] -> Maybe (Int,Int)
 cramer m1 m2 b = case det m1 m2 of
