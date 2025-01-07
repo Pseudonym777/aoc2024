@@ -22,7 +22,7 @@ part2 = do
     print $ take 1 [x |x <- [0..], mod x 101 == xaligned,  mod x 103 == yaligned ] 
     -- again could be smarter and use crt but 10000 is pretty small for just some modular arithmetic
 
---just used for testing to notice clustering
+--used for testing to notice clustering
 printboard botset  = show [[if S.member (x,y) botset then 'B' else ' '|x <- [0..101]]|y <- [0..boundy]]
 
 --counts unique x/y values, not very general for different input but I noticed this would work when looking at the first few grids
